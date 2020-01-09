@@ -14,14 +14,14 @@ namespace LiniaProdukcyjnaApp
     public partial class Form1 : Form
     {
         int licznik = 0;
-        Image tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
+        Image tort = Image.FromFile("../../Res/tort.png");
         int random;
         Boolean somethingWrong = false;
         public Form1()
         {
             InitializeComponent();
             pictureBox5.BackColor = Color.Black;
-            pictureBox6.Image= Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort0.png");
+            pictureBox6.Image= Image.FromFile("../../Res/tort0.png");
             Font f = new Font("Arial", 20, FontStyle.Bold);
             Font f1 = new Font("Arial", 10, FontStyle.Bold);
             button1.Font = f;
@@ -90,7 +90,7 @@ namespace LiniaProdukcyjnaApp
         {
             button1.BackColor = Color.Red;
             button1.Text = "ZMNIEJSZ";
-            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort2.png");
+            tort = Image.FromFile("../../Res/tort2.png");
             somethingWrong = true;
             label8.Text = "Za dużo czekolady! Zrobił ci się tort czekoladowy!";
         }
@@ -99,7 +99,7 @@ namespace LiniaProdukcyjnaApp
         {
             button2.BackColor = Color.Red;
             button2.Text = "ZMNIEJSZ";
-            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort3.png");
+            tort = Image.FromFile("../../Res/tort3.png");
             somethingWrong = true;
             label8.Text = "Za dużo kremu! Zrobiła ci się kremówka!";
         }
@@ -107,7 +107,7 @@ namespace LiniaProdukcyjnaApp
         {
             button3.BackColor = Color.Red;
             button3.Text = "ZMNIEJSZ";
-            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort4.png");
+            tort = Image.FromFile("../../Res/tort4.png");
             somethingWrong = true;
             label8.Text = "Za dużo proszku do pieczenia! Zrobił ci się ogromny tort!";
         }
@@ -115,7 +115,7 @@ namespace LiniaProdukcyjnaApp
         {
             button4.BackColor = Color.Red;
             button4.Text = "ZMNIEJSZ TEMP.";
-            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/burnedCake.png");
+            tort = Image.FromFile("../../Res/burnedCake.png");
             somethingWrong = true;
             label8.Text = "Za gorący piekarnik! Spaliłeś/aś tort!";
         }
@@ -123,7 +123,7 @@ namespace LiniaProdukcyjnaApp
         {
             button5.BackColor = Color.Red;
             button5.Text = "ZMNIEJSZ";
-            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/donut.png");
+            tort = Image.FromFile("../../Res/donut.png");
             somethingWrong = true;
             label8.Text = "Za dużo cukru! Zrobił ci się pączek!";
         }
@@ -131,7 +131,7 @@ namespace LiniaProdukcyjnaApp
         {
             button6.BackColor = Color.Blue;
             button6.Text = "ZWIĘKSZ";
-            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/ice.png");
+            tort = Image.FromFile("../../Res/ice.png");
             somethingWrong = true;
             label8.Text = "Przetrzymywałeś/aś tort w zimnie! Zrobił ci się pucharek lodowy";
         }
@@ -139,7 +139,7 @@ namespace LiniaProdukcyjnaApp
         {
             button3.BackColor = Color.Blue;
             button3.Text = "ZWIĘKSZ";
-            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/cupcake.png");
+            tort = Image.FromFile("../../Res/cupcake.png");
             somethingWrong = true;
             label8.Text = "Za mało proszku do pieczenia! Zrobiła ci się mała babeczka!";
         }
@@ -151,7 +151,7 @@ namespace LiniaProdukcyjnaApp
         {
             button4.BackColor = Color.Blue;
             button4.Text = "ZWIĘKSZ TEMP.";
-            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/rawcake.png");
+            tort = Image.FromFile("../../Res/rawcake.png");
             somethingWrong = true;
             label8.Text = "Za zimny piekarnik! Masz surowy tort!";
         }
@@ -159,7 +159,7 @@ namespace LiniaProdukcyjnaApp
         {
             button5.BackColor = Color.Blue;
             button5.Text = "ZWIĘSZ";
-            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/precel.png");
+            tort = Image.FromFile("../../Res/precel.png");
             somethingWrong = true;
             label8.Text = "Za mało cukru! Zrobił ci się słony precel!";
         }
@@ -217,7 +217,7 @@ namespace LiniaProdukcyjnaApp
                             }
                             else
                             {
-                                tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
+                                tort = Image.FromFile("../../Res/tort.png");
                                 button6.Invoke(new ChangeButtonsDelegate(AllFine));
                             }
                         }
