@@ -35,6 +35,11 @@ namespace LiniaProdukcyjnaApp
             label4.Font = f1;
             label5.Font = f1;
             label6.Font = f1;
+            label7.Font = f1;
+            label8.Font = f1;
+            label8.ForeColor = Color.Red;
+            pictureBox8.BackColor = Color.Red;
+            pictureBox7.BackColor = Color.Blue;
             var thread = new Thread(StartCounting);
             thread.IsBackground = true;
             thread.Start();
@@ -87,6 +92,7 @@ namespace LiniaProdukcyjnaApp
             button1.Text = "ZMNIEJSZ";
             tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort2.png");
             somethingWrong = true;
+            label8.Text = "Za dużo czekolady! Zrobił ci się tort czekoladowy!";
         }
 
         private void TooMuchCream()
@@ -95,6 +101,7 @@ namespace LiniaProdukcyjnaApp
             button2.Text = "ZMNIEJSZ";
             tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort3.png");
             somethingWrong = true;
+            label8.Text = "Za dużo kremu! Zrobiła ci się kremówka!";
         }
         private void TooMuchBakingPowder()
         {
@@ -102,6 +109,7 @@ namespace LiniaProdukcyjnaApp
             button3.Text = "ZMNIEJSZ";
             tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort4.png");
             somethingWrong = true;
+            label8.Text = "Za dużo proszku do pieczenia! Zrobił ci się ogromny tort!";
         }
         private void TooHotOwen()
         {
@@ -109,6 +117,7 @@ namespace LiniaProdukcyjnaApp
             button4.Text = "ZMNIEJSZ TEMP.";
             tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/burnedCake.png");
             somethingWrong = true;
+            label8.Text = "Za gorący piekarnik! Spaliłeś/aś tort!";
         }
         private void TooMuchSugar()
         {
@@ -116,8 +125,44 @@ namespace LiniaProdukcyjnaApp
             button5.Text = "ZMNIEJSZ";
             tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/donut.png");
             somethingWrong = true;
+            label8.Text = "Za dużo cukru! Zrobił ci się pączek!";
         }
-
+        private void TooCold()
+        {
+            button6.BackColor = Color.Blue;
+            button6.Text = "ZWIĘKSZ";
+            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/ice.png");
+            somethingWrong = true;
+            label8.Text = "Przetrzymywałeś/aś tort w zimnie! Zrobił ci się pucharek lodowy";
+        }
+        private void TooLittleBakingPowder()
+        {
+            button3.BackColor = Color.Blue;
+            button3.Text = "ZWIĘKSZ";
+            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/cupcake.png");
+            somethingWrong = true;
+            label8.Text = "Za mało proszku do pieczenia! Zrobiła ci się mała babeczka!";
+        }
+        private void AllFine()
+        {
+            label8.Text = "BRAWO! Tort jest doskonały!";
+        }
+        private void TooColdOwen()
+        {
+            button4.BackColor = Color.Blue;
+            button4.Text = "ZWIĘKSZ TEMP.";
+            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/rawcake.png");
+            somethingWrong = true;
+            label8.Text = "Za zimny piekarnik! Masz surowy tort!";
+        }
+        private void TooLittleSugar()
+        {
+            button5.BackColor = Color.Blue;
+            button5.Text = "ZWIĘSZ";
+            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/precel.png");
+            somethingWrong = true;
+            label8.Text = "Za mało cukru! Zrobił ci się słony precel!";
+        }
 
         private void StartCounting()
         {
@@ -133,7 +178,7 @@ namespace LiniaProdukcyjnaApp
 
                         if (somethingWrong == false)
                         {
-                            random = GetRandomNumber(0, 10);
+                            random = GetRandomNumber(0, 12);
                             if (random == 2)
                             {
                                 button1.Invoke(new ChangeButtonsDelegate(TooMuchChocolate));
@@ -154,9 +199,26 @@ namespace LiniaProdukcyjnaApp
                             {
                                 button5.Invoke(new ChangeButtonsDelegate(TooMuchSugar));
                             }
+                            else if (random == 7)
+                            {
+                                button6.Invoke(new ChangeButtonsDelegate(TooCold));
+                            }
+                            else if (random == 8)
+                            {
+                                button6.Invoke(new ChangeButtonsDelegate(TooLittleBakingPowder));
+                            }
+                            else if (random == 9)
+                            {
+                                button4.Invoke(new ChangeButtonsDelegate(TooColdOwen));
+                            }
+                            else if (random == 10)
+                            {
+                                button4.Invoke(new ChangeButtonsDelegate(TooLittleSugar));
+                            }
                             else
                             {
                                 tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
+                                button6.Invoke(new ChangeButtonsDelegate(AllFine));
                             }
                         }
                         else
@@ -236,6 +298,13 @@ namespace LiniaProdukcyjnaApp
         {
             button5.BackColor = Color.LightGray;
             button5.Text = "OK";
+            somethingWrong = false;
+        }
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            button6.BackColor = Color.LightGray;
+            button6.Text = "OK";
             somethingWrong = false;
         }
     }
