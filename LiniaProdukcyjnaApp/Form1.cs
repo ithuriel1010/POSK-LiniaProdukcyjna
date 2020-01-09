@@ -16,6 +16,7 @@ namespace LiniaProdukcyjnaApp
         int licznik = 0;
         Image tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
         int random;
+        Boolean somethingWrong = false;
         public Form1()
         {
             InitializeComponent();
@@ -28,7 +29,6 @@ namespace LiniaProdukcyjnaApp
         }
 
         private delegate void SetImageDelegate(Image path);
-
         private void SetImagePicture4(Image path)
         {
             pictureBox4.Visible = true;
@@ -66,50 +66,94 @@ namespace LiniaProdukcyjnaApp
             pictureBox3.Visible = false;
         }
 
+        private delegate void ChangeButtonsDelegate();
+        private void TooMuchChocolate()
+        {
+            button1.BackColor = Color.Red;
+            button1.Text = "ZA DUŻO CZEKOLADY \n ZMNIEJSZ";
+            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort2.png");
+            somethingWrong = true;
+        }
+
+        private void TooMuchCream()
+        {
+            button2.BackColor = Color.Red;
+            button2.Text = "ZA DUŻO KREMU \n ZMNIEJSZ";
+            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort3.png");
+            somethingWrong = true;
+        }
+        private void TooMuchBakingPowder()
+        {
+            button3.BackColor = Color.Red;
+            button3.Text = "ZA DUŻO PROSZKU DO PIECZENIA \n ZMNIEJSZ";
+            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort4.png");
+            somethingWrong = true;
+        }
+
 
         private void StartCounting()
         {
 
-            while(true)
+            while (true)
             {
                 licznik++;
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
 
-                if (licznik == 1)
+                switch (licznik)
                 {
-                    random = GetRandomNumber(0, 4);
-                    if(random==2)
-                    {
-                        tort= Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort2.png");
-                    }
-                    else
-                    {
-                        tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
-                    }
-                    pictureBox4.Invoke(new SetImageDelegate(SetImagePicture4), tort);
-                }
-                else if (licznik == 2)
-                {
-                    pictureBox2.Invoke(new SetImageDelegate(SetImagePicture2), tort);
-                }
-                else if (licznik == 3)
-                {
-                    pictureBox3.Invoke(new SetImageDelegate(SetImagePicture3), tort);
-                }
-                else if (licznik == 4)
-                {
-                    pictureBox1.Invoke(new SetImageDelegate(SetImagePicture1), tort);
-                }
-                else if (licznik == 5)
-                {
-                    pictureBox1.Invoke(new SetImageDelegate(DoNothing), tort);
-                    licznik = 0;
+                    case 1:
+
+                        if (somethingWrong == false)
+                        {
+                            random = GetRandomNumber(0, 5);
+                            if (random == 2)
+                            {
+                                button1.Invoke(new ChangeButtonsDelegate(TooMuchChocolate));
+                            }
+                            else if(random==3)
+                            {
+                                button2.Invoke(new ChangeButtonsDelegate(TooMuchCream));
+                            }
+                            else if (random == 4)
+                            {
+                                button2.Invoke(new ChangeButtonsDelegate(TooMuchBakingPowder));
+                            }
+                            else
+                            {
+                                tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
+                            }
+                        }
+                        else
+                        {
+                            tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
+                        }
+
+                        pictureBox4.Invoke(new SetImageDelegate(SetImagePicture4), tort);
+                        break;
+
+                    case 2:
+
+                        pictureBox2.Invoke(new SetImageDelegate(SetImagePicture2), tort);
+                        break;
+
+                    case 3:
+
+                        pictureBox3.Invoke(new SetImageDelegate(SetImagePicture3), tort);
+                        break;
+
+                    case 4:
+
+                        pictureBox1.Invoke(new SetImageDelegate(SetImagePicture1), tort);
+                        break;
+
+                    case 5:
+
+                        pictureBox1.Invoke(new SetImageDelegate(DoNothing), tort);
+                        licznik = 0;
+                        break;
+
                 }
             }
-            
-
-
-            //thread.Start();
         }
 
         private static readonly Random getrandom = new Random();
@@ -121,9 +165,27 @@ namespace LiniaProdukcyjnaApp
             }
         }
 
-        private void PictureBox4_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
+            button1.BackColor = Color.LightGray;
+            button1.Text = "Poziom czekolady: OK";
+            //tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
+            somethingWrong = false;
+        }
 
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            button2.BackColor = Color.LightGray;
+            button2.Text = "Poziom kremu: OK";
+            //tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
+            somethingWrong = false;
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.LightGray;
+            button3.Text = "Poziom proszku do pieczenia: OK";
+            somethingWrong = false;
         }
     }
 }
