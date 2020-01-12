@@ -153,7 +153,7 @@ namespace LiniaProdukcyjnaApp
             button4.Text = "ZWIĘKSZ TEMP.";
             tort = Image.FromFile("../../Res/rawcake.png");
             somethingWrong = true;
-            label8.Text = "Za zimny piekarnik! Masz surowy tort!";
+            label8.Text = "Za zimny piekarnik! Masz surowe ciasto!";
         }
         private void TooLittleSugar()
         {
