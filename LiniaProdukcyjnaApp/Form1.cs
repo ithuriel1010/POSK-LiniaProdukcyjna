@@ -14,9 +14,14 @@ namespace LiniaProdukcyjnaApp
     public partial class Form1 : Form
     {
         int licznik = 0;
+        int czas = 0;
+        int inactivityTime = 0;
         Image tort = Image.FromFile("../../Res/tort.png");
         int random;
         Boolean somethingWrong = false;
+        Boolean startcount = false;
+        Form3 m = new Form3();
+
         public Form1()
         {
             InitializeComponent();
@@ -44,7 +49,11 @@ namespace LiniaProdukcyjnaApp
             thread.IsBackground = true;
             thread.Start();
 
+            var thread2 = new Thread(InactivityTime);
+            thread2.IsBackground = true;
+            thread2.Start();
 
+            m.form1 = this;
         }
 
         private delegate void SetImageDelegate(Image path);
@@ -83,6 +92,11 @@ namespace LiniaProdukcyjnaApp
             pictureBox4.Visible = false;
             pictureBox2.Visible = false;
             pictureBox3.Visible = false;
+        }
+
+        private void Check(Image path)
+        {
+            m.Show();
         }
 
         private delegate void ChangeButtonsDelegate();
@@ -170,89 +184,123 @@ namespace LiniaProdukcyjnaApp
             while (true)
             {
                 licznik++;
+                czas++;
                 Thread.Sleep(500);
 
-                switch (licznik)
+                if(czas<=30 && startcount==false)
                 {
-                    case 1:
+                    switch (licznik)
+                    {
+                        case 1:
 
-                        if (somethingWrong == false)
-                        {
-                            random = GetRandomNumber(0, 12);
-                            if (random == 2)
+                            if (somethingWrong == false)
                             {
-                                button1.Invoke(new ChangeButtonsDelegate(TooMuchChocolate));
-                            }
-                            else if(random==3)
-                            {
-                                button2.Invoke(new ChangeButtonsDelegate(TooMuchCream));
-                            }
-                            else if (random == 4)
-                            {
-                                button3.Invoke(new ChangeButtonsDelegate(TooMuchBakingPowder));
-                            }
-                            else if (random == 5)
-                            {
-                                button4.Invoke(new ChangeButtonsDelegate(TooHotOwen));
-                            }
-                            else if (random == 6)
-                            {
-                                button5.Invoke(new ChangeButtonsDelegate(TooMuchSugar));
-                            }
-                            else if (random == 7)
-                            {
-                                button6.Invoke(new ChangeButtonsDelegate(TooCold));
-                            }
-                            else if (random == 8)
-                            {
-                                button6.Invoke(new ChangeButtonsDelegate(TooLittleBakingPowder));
-                            }
-                            else if (random == 9)
-                            {
-                                button4.Invoke(new ChangeButtonsDelegate(TooColdOwen));
-                            }
-                            else if (random == 10)
-                            {
-                                button4.Invoke(new ChangeButtonsDelegate(TooLittleSugar));
-                            }
-                            else
-                            {
-                                tort = Image.FromFile("../../Res/tort.png");
-                                button6.Invoke(new ChangeButtonsDelegate(AllFine));
-                            }
-                        }
-                        else
-                        {
-                            //tort = Image.FromFile("D:/Studia/Semestr V/Współczesne języki programowania/Projekt/Sweets/PNG/tort.png");
-                        }
+                                random = GetRandomNumber(0, 12);
+                                if (random == 2)
+                                {
+                                    button1.Invoke(new ChangeButtonsDelegate(TooMuchChocolate));
+                                }
+                                else if (random == 3)
+                                {
+                                    button2.Invoke(new ChangeButtonsDelegate(TooMuchCream));
+                                }
+                                else if (random == 4)
+                                {
+                                    button3.Invoke(new ChangeButtonsDelegate(TooMuchBakingPowder));
+                                }
+                                else if (random == 5)
+                                {
+                                    button4.Invoke(new ChangeButtonsDelegate(TooHotOwen));
+                                }
+                                else if (random == 6)
+                                {
+                                    button5.Invoke(new ChangeButtonsDelegate(TooMuchSugar));
+                                }
+                                else if (random == 7)
+                                {
+                                    button6.Invoke(new ChangeButtonsDelegate(TooCold));
+                                }
+                                else if (random == 8)
+                                {
+                                    button6.Invoke(new ChangeButtonsDelegate(TooLittleBakingPowder));
+                                }
+                                else if (random == 9)
+                                {
+                                    button4.Invoke(new ChangeButtonsDelegate(TooColdOwen));
+                                }
+                                else if (random == 10)
+                                {
+                                    button4.Invoke(new ChangeButtonsDelegate(TooLittleSugar));
+                                }
+                                else
+                                {
+                                    tort = Image.FromFile("../../Res/tort.png");
+                                    button6.Invoke(new ChangeButtonsDelegate(AllFine));
+                                }
+                            }                           
 
-                        pictureBox4.Invoke(new SetImageDelegate(SetImagePicture4), tort);
-                        break;
+                            pictureBox4.Invoke(new SetImageDelegate(SetImagePicture4), tort);
+                            break;
 
-                    case 2:
+                        case 2:
 
-                        pictureBox2.Invoke(new SetImageDelegate(SetImagePicture2), tort);
-                        break;
+                            pictureBox2.Invoke(new SetImageDelegate(SetImagePicture2), tort);
+                            break;
 
-                    case 3:
+                        case 3:
 
-                        pictureBox3.Invoke(new SetImageDelegate(SetImagePicture3), tort);
-                        break;
+                            pictureBox3.Invoke(new SetImageDelegate(SetImagePicture3), tort);
+                            break;
 
-                    case 4:
+                        case 4:
 
-                        pictureBox1.Invoke(new SetImageDelegate(SetImagePicture1), tort);
-                        break;
+                            pictureBox1.Invoke(new SetImageDelegate(SetImagePicture1), tort);
+                            break;
 
-                    case 5:
+                        case 5:
 
-                        pictureBox1.Invoke(new SetImageDelegate(DoNothing), tort);
-                        licznik = 0;
-                        break;
+                            pictureBox1.Invoke(new SetImageDelegate(DoNothing), tort);
+                            licznik = 0;
+                            break;
 
+                    }
                 }
+                else
+                {
+                    startcount = true;
+                    pictureBox4.Invoke(new SetImageDelegate(Check), tort);
+                }
+
             }
         }
+
+        private void InactivityTime()
+        {
+            while(true)
+            {
+                Thread.Sleep(1000);
+
+                if(startcount)
+                {
+                    inactivityTime++;
+                    pictureBox1.Invoke(new SetImageDelegate(DoNothing), tort);
+
+                    if (inactivityTime >= 30)
+                    {
+                        System.Environment.Exit(-1);
+                    }
+                }                
+            }            
+        }
+
+        public void ActiveUser()
+        {
+            inactivityTime = 0;
+            startcount = false;
+            czas = 0;
+            licznik = 0;
+        }
+
 
         private static readonly Random getrandom = new Random();
 
